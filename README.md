@@ -2,6 +2,21 @@
 
 A two-stage license plate reader in Python: locate the plate in a photo with classical image processing, then read the characters with Tesseract OCR.
 
+## Web app (Streamlit)
+
+**Live demo: https://shreyask06-plate-reader.streamlit.app** (pick a sample photo or upload your own).
+
+`streamlit_app.py` runs the pipeline in the browser: it draws the plate candidates on the photo, shows the sharpened crop that goes to OCR, and reports the reading with Tesseract's average confidence. If several regions look like plates you can choose which one to read (the original script always takes the first). The logic lives in `plate_reader.py`, which uses the same thresholds and OCR settings as the two scripts below.
+
+On the bundled samples it reads `car.jpg` as `egb 626aa` (low confidence, about 26 out of 100) and `car2.jpg` as `let itgol` (about 85 out of 100; the plate is the vanity plate `LETITGO1`, so the last character is misread). The detector uses fixed size and aspect-ratio thresholds, so it works best on close, level photos of roughly 500 to 800 px and can miss plates in other images.
+
+```bash
+pip install -r requirements.txt     # also install the Tesseract binary
+streamlit run streamlit_app.py
+```
+
+To deploy on [Streamlit Community Cloud](https://share.streamlit.io), point it at this repo with `streamlit_app.py` as the main file and set the app URL; `packages.txt` installs Tesseract.
+
 ## How it works
 
 **1. Plate detection (`plateDetection.py`)**
