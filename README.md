@@ -4,7 +4,7 @@ A two-stage license plate reader in Python: locate the plate in a photo with cla
 
 ## Web app (Streamlit)
 
-**Live demo: https://shreyask06-plate-reader.streamlit.app** (pick a sample photo or upload your own).
+**Live demo: https://shreyask06-plate-detection.streamlit.app** (pick a sample photo or upload your own).
 
 `streamlit_app.py` runs the pipeline in the browser: it draws the plate candidates on the photo, shows the sharpened crop that goes to OCR, and reports the reading with Tesseract's average confidence. If several regions look like plates you can choose which one to read (the original script always takes the first). The logic lives in `plate_reader.py`, which uses the same thresholds and OCR settings as the two scripts below.
 
